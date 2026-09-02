@@ -13,13 +13,13 @@ const chefs: Chef[] = [
   {
     name: "Brad Donakowski",
     role: "Co-Founder & Engineer",
-    bio: "Senior engineer with a background spanning energy tech, fintech, healthcare, and consulting. Built apps used by 800K+ users, designed AI development pipelines, and has a thing for clean architecture. Denver born, Detroit sports loyal. When he's not coding, he's playing guitar, watching hockey, or chasing his kid around.",
+    bio: "Senior engineer with 7 years of experience spanning energy tech, fintech, healthcare, and consulting. Built apps used by 800K+ users, designed AI development pipelines, and has a thing for clean architecture.",
     interests: ["Flutter", "AI/ML", "IoT", "React"],
   },
   {
     name: "Mauricio Munoz",
     role: "Co-Founder & Engineer",
-    bio: "Software architect who's shipped apps to hundreds of thousands of users across energy tech and consumer electronics. Brings deep expertise in system design, scalable infrastructure, and turning complex requirements into elegant solutions. Splits his free time between the boxing ring and building things that matter.",
+    bio: "Software architect with 9 years of experience shipping apps to hundreds of thousands of users across energy tech and consumer electronics. Brings deep expertise in system design, scalable infrastructure, and turning complex requirements into elegant solutions.",
     interests: ["Architecture", "Cloud", "Systems Design", "Mobile"],
   },
 ];
