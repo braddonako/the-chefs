@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { siteConfig } from "@/config/menu";
 
 export default function Hero() {
@@ -16,29 +19,49 @@ export default function Hero() {
       </div>
 
       <div className="relative mx-auto max-w-3xl">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-accent">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-accent"
+        >
           Software Development Studio
-        </p>
-        <h1 className="mb-6 text-5xl font-bold leading-tight tracking-tight text-text-on-dark md:text-7xl">
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mb-6 text-5xl font-bold leading-tight tracking-tight text-text-on-dark md:text-7xl"
+        >
           {siteConfig.slogan}
-        </h1>
-        <p className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-text-on-dark-muted md:text-xl">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.55 }}
+          className="mx-auto mb-10 max-w-xl text-lg leading-relaxed text-text-on-dark-muted md:text-xl"
+        >
           {siteConfig.description}
-        </p>
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.75 }}
+          className="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
           <a
             href="#menu"
-            className="rounded-full bg-brand-primary px-8 py-3.5 text-base font-semibold text-white transition-colors hover:bg-brand-primary-hover"
+            className="btn-primary rounded-full bg-brand-primary px-8 py-3.5 text-base font-semibold text-white transition-all hover:bg-brand-primary-hover"
           >
             See the Menu
           </a>
           <a
             href="#contact"
-            className="rounded-full border-2 border-text-on-dark-muted px-8 py-3.5 text-base font-semibold text-text-on-dark transition-colors hover:border-text-on-dark hover:bg-white/5"
+            className="btn-outline rounded-full border-2 border-text-on-dark-muted px-8 py-3.5 text-base font-semibold text-text-on-dark transition-all hover:border-text-on-dark hover:bg-white/5"
           >
             Book a Table
           </a>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

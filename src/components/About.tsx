@@ -1,3 +1,9 @@
+"use client";
+
+import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
+import StaggerChildren, { staggerItem } from "./StaggerChildren";
+
 export default function About() {
   const ingredients = [
     {
@@ -29,7 +35,7 @@ export default function About() {
   return (
     <section id="about" className="bg-bg-tertiary px-6 py-20 md:py-28">
       <div className="mx-auto max-w-[var(--content-max-width)]">
-        <div className="mb-16 text-center">
+        <FadeIn className="mb-16 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-primary">
             Who We Are
           </p>
@@ -39,9 +45,9 @@ export default function About() {
           <div className="menu-divider mx-auto max-w-xs">
             <span className="text-sm">✦</span>
           </div>
-        </div>
+        </FadeIn>
 
-        <div className="mx-auto mb-16 max-w-2xl text-center">
+        <FadeIn className="mx-auto mb-16 max-w-2xl text-center" delay={0.15}>
           <p className="text-lg leading-relaxed text-text-secondary">
             We&apos;re a senior developer and a software architect who got tired
             of watching good ideas get ruined by bad execution. We don&apos;t use
@@ -49,11 +55,11 @@ export default function About() {
             it&apos;s supposed to be built — with care, craft, and a little bit
             of heat.
           </p>
-        </div>
+        </FadeIn>
 
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <StaggerChildren className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
           {ingredients.map((item) => (
-            <div key={item.title} className="text-center">
+            <motion.div key={item.title} variants={staggerItem} className="text-center">
               <span className="mb-4 block text-4xl">{item.icon}</span>
               <h3 className="mb-2 text-lg font-semibold text-text-primary">
                 {item.title}
@@ -61,9 +67,9 @@ export default function About() {
               <p className="text-sm leading-relaxed text-text-secondary">
                 {item.description}
               </p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </StaggerChildren>
       </div>
     </section>
   );
