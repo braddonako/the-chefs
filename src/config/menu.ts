@@ -117,7 +117,7 @@ export const menuCategories: MenuCategory[] = [
   },
   {
     title: "Off-Menu",
-    subtitle: "We'll build something we haven't thought of yet.",
+    subtitle: "Not seeing what fits your appetite? Send it to the kitchen — we'll cook up something custom.",
     icon: "🤫",
     items: [],
   },
