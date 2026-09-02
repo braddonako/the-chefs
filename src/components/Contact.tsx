@@ -5,7 +5,7 @@ import FadeIn from "./FadeIn";
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-bg-dark px-6 py-20 md:py-28">
+    <section id="contact" className="section-divider bg-bg-dark px-6 py-20 md:py-28">
       <div className="mx-auto max-w-2xl text-center">
         <FadeIn>
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-accent">

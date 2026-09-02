@@ -1,8 +1,52 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useRef } from "react";
 import FadeIn from "./FadeIn";
 import StaggerChildren, { staggerItem } from "./StaggerChildren";
+
+function TiltCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0.5);
+  const y = useMotionValue(0.5);
+  const rotateX = useTransform(y, [0, 1], [6, -6]);
+  const rotateY = useTransform(x, [0, 1], [-6, 6]);
+
+  function handleMouse(e: React.MouseEvent) {
+    const rect = ref.current?.getBoundingClientRect();
+    if (!rect) return;
+    x.set((e.clientX - rect.left) / rect.width);
+    y.set((e.clientY - rect.top) / rect.height);
+  }
+
+  function handleLeave() {
+    x.set(0.5);
+    y.set(0.5);
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={staggerItem}
+      onMouseMove={handleMouse}
+      onMouseLeave={handleLeave}
+      style={{ rotateX, rotateY, transformPerspective: 600 }}
+      className="tilt-card rounded-xl border border-border-light bg-bg-secondary p-8 text-center shadow-sm transition-shadow hover:shadow-lg"
+    >
+      <span className="mb-4 block text-4xl">{icon}</span>
+      <h3 className="mb-2 text-lg font-semibold text-text-primary">{title}</h3>
+      <p className="text-sm leading-relaxed text-text-secondary">{description}</p>
+    </motion.div>
+  );
+}
 
 export default function About() {
   const ingredients = [
@@ -33,7 +77,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="bg-bg-tertiary px-6 py-20 md:py-28">
+    <section id="about" className="section-divider bg-bg-tertiary px-6 py-20 md:py-28">
       <div className="mx-auto max-w-[var(--content-max-width)]">
         <FadeIn className="mb-16 text-center">
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-primary">
@@ -59,15 +103,7 @@ export default function About() {
 
         <StaggerChildren className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
           {ingredients.map((item) => (
-            <motion.div key={item.title} variants={staggerItem} className="text-center">
-              <span className="mb-4 block text-4xl">{item.icon}</span>
-              <h3 className="mb-2 text-lg font-semibold text-text-primary">
-                {item.title}
-              </h3>
-              <p className="text-sm leading-relaxed text-text-secondary">
-                {item.description}
-              </p>
-            </motion.div>
+            <TiltCard key={item.title} {...item} />
           ))}
         </StaggerChildren>
       </div>
