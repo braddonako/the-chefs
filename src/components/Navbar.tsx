@@ -17,7 +17,8 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-border-light bg-bg-secondary/90 backdrop-blur-md">
       <div className="mx-auto flex max-w-[var(--content-max-width)] items-center justify-between px-6 py-0">
         <a href="#" className="flex items-center gap-2">
-          <img src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/logo.png`} alt={siteConfig.name} className="h-24 md:h-32" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="./logo.png" alt={siteConfig.name} className="h-24 md:h-32" />
         </a>
 
         {/* Desktop nav */}
