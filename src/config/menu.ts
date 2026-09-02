@@ -115,6 +115,12 @@ export const menuCategories: MenuCategory[] = [
       },
     ],
   },
+  {
+    title: "Off-Menu",
+    subtitle: "We'll build something we haven't thought of yet.",
+    icon: "🤫",
+    items: [],
+  },
 ];
 
 export const testimonials: Testimonial[] = [

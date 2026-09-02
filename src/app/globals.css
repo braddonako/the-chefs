@@ -170,6 +170,26 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
+/* ─── Project cards ─── */
+.project-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ─── Hide scrollbar ─── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ─── Decorative line divider ─── */
 .menu-divider {
   display: flex;

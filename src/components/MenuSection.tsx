@@ -38,23 +38,37 @@ function MenuItemRow({ item }: { item: MenuItem }) {
 }
 
 function CategorySection({ category }: { category: MenuCategory }) {
+  const isEmpty = category.items.length === 0;
+
   return (
     <div className="mb-14 last:mb-0">
-      <FadeIn className="mb-6 text-center">
+      <FadeIn className={`${isEmpty ? "" : "mb-6"} text-center`}>
         <span className="mb-2 block text-2xl">{category.icon}</span>
         <h3 className="font-display text-2xl font-bold uppercase tracking-wide text-text-primary md:text-3xl">
           {category.title}
         </h3>
         <p className="mt-1 text-sm italic text-text-muted">{category.subtitle}</p>
-        <div className="menu-ornament mt-3">
-          <span>✦</span>
-        </div>
+        {!isEmpty && (
+          <div className="menu-ornament mt-3">
+            <span>✦</span>
+          </div>
+        )}
+        {isEmpty && (
+          <a
+            href="#contact"
+            className="btn-primary mt-6 inline-block rounded-full bg-brand-primary px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-primary-hover"
+          >
+            Send It to the Kitchen
+          </a>
+        )}
       </FadeIn>
-      <StaggerChildren className="mx-auto max-w-2xl divide-y divide-border-light" stagger={0.12}>
-        {category.items.map((item) => (
-          <MenuItemRow key={item.name} item={item} />
-        ))}
-      </StaggerChildren>
+      {!isEmpty && (
+        <StaggerChildren className="mx-auto max-w-2xl divide-y divide-border-light" stagger={0.12}>
+          {category.items.map((item) => (
+            <MenuItemRow key={item.name} item={item} />
+          ))}
+        </StaggerChildren>
+      )}
     </div>
   );
 }

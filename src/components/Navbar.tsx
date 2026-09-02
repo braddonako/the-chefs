@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/menu";
 
 const navLinks = [
   { label: "Menu", href: "#menu" },
+  { label: "Projects", href: "#projects" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
 ];

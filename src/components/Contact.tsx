@@ -9,10 +9,10 @@ export default function Contact() {
       <div className="mx-auto max-w-2xl text-center">
         <FadeIn>
           <p className="mb-2 text-sm font-semibold uppercase tracking-widest text-brand-accent">
-            Ready to Start?
+            Have a Project?
           </p>
           <h2 className="mb-4 text-3xl font-bold text-text-on-dark md:text-4xl">
-            Book a Table
+            Send It to the Kitchen
           </h2>
           <div className="menu-divider mx-auto mb-8 max-w-xs">
             <span className="text-sm text-text-on-dark-muted">✦</span>
