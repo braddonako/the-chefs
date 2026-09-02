@@ -9,16 +9,16 @@ import StaggerChildren, { staggerItem } from "./StaggerChildren";
 function MenuItemRow({ item }: { item: MenuItem }) {
   return (
     <motion.div variants={staggerItem} className="menu-item-row group py-5 first:pt-0 last:pb-0">
-      <div className="mb-1 flex items-baseline gap-2">
-        <h4 className="shrink-0 text-lg font-semibold text-text-primary transition-colors group-hover:text-brand-primary md:text-xl">
+      <div className="mb-1 flex flex-wrap items-baseline gap-x-2 gap-y-0">
+        <h4 className="text-lg font-semibold text-text-primary transition-colors group-hover:text-brand-primary md:text-xl">
           {item.name}
         </h4>
-        <span className="menu-dots min-w-8 flex-1" />
-        <span className="shrink-0 text-lg font-semibold text-brand-primary">
+        <span className="hidden min-w-4 flex-1 md:block menu-dots" />
+        <span className="text-lg font-semibold text-brand-primary">
           {item.price}
         </span>
       </div>
-      <p className="pr-24 text-sm leading-relaxed text-text-secondary italic">
+      <p className="text-sm leading-relaxed text-text-secondary italic md:pr-24">
         {item.description}
       </p>
       {item.tags && (
