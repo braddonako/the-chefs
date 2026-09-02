@@ -186,6 +186,17 @@ h1, h2, h3 {
   box-shadow: var(--shadow-lg);
 }
 
+/* ─── Carousel centering on mobile only ─── */
+.mobile-carousel-padding {
+  padding-inline: max(1.5rem, calc((100% - 85vw) / 2));
+}
+
+@media (min-width: 768px) {
+  .mobile-carousel-padding {
+    padding-inline: 0;
+  }
+}
+
 /* ─── Hide scrollbar ─── */
 .scrollbar-hide {
   -ms-overflow-style: none;

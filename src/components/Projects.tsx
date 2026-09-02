@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "./FadeIn";
 
@@ -20,18 +20,18 @@ const projects: Project[] = [
     highlight: "4.8 stars · 10K+ reviews",
   },
   {
-    title: "AI Development Pipeline",
-    description:
-      "Multi-agent AI workflow orchestrating requirements, architecture, code generation, and review — with specialized models scoped per phase and structured knowledge retrieval.",
-    tags: ["AI/ML", "Claude", "DevOps"],
-    highlight: "4-phase autonomous pipeline",
-  },
-  {
     title: "Construction Neobank",
     description:
       "Flutter-based payment platform for the construction industry with instant payment processing, digital lien waivers, and multi-state legal compliance.",
     tags: ["Flutter", "Fintech", "Angular"],
     highlight: "Banking API integration",
+  },
+  {
+    title: "AI Development Pipeline",
+    description:
+      "Multi-agent AI workflow orchestrating requirements, architecture, code generation, and review — with specialized models scoped per phase and structured knowledge retrieval.",
+    tags: ["AI/ML", "Claude", "DevOps"],
+    highlight: "4-phase autonomous pipeline",
   },
   {
     title: "Sleep Diagnostics Platform",
@@ -41,18 +41,18 @@ const projects: Project[] = [
     highlight: "Global distributed team",
   },
   {
-    title: "Offline Sales Catalog",
-    description:
-      "Enterprise Flutter app with SAP authentication, AWS backend, and multi-format export — built to work fully offline in the field.",
-    tags: ["Flutter", "AWS", "IoT"],
-    highlight: "Fully offline-capable",
-  },
-  {
     title: "Industrial Hardware Integration",
     description:
       "Belt frequency detection app with native Android audio processing, microphone hardware access, and full Chinese/English localization.",
     tags: ["Android", "IoT", "Hardware"],
     highlight: "Native hardware integration",
+  },
+  {
+    title: "Offline Sales Catalog",
+    description:
+      "Enterprise Flutter app with SAP authentication, AWS backend, and multi-format export — built to work fully offline in the field.",
+    tags: ["Flutter", "AWS", "IoT"],
+    highlight: "Fully offline-capable",
   },
 ];
 
@@ -86,20 +86,43 @@ export default function Projects() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.querySelector<HTMLDivElement>(":scope > div")?.offsetWidth ?? 300;
+    el.scrollLeft = 0;
+  }, []);
 
   function updateScrollState() {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+
+    // Calculate active card index
+    const cardWidth = el.querySelector<HTMLDivElement>(":scope > div")?.offsetWidth ?? 300;
+    const index = Math.round(el.scrollLeft / (cardWidth + 24));
+    setActiveIndex(Math.min(index, projects.length - 1));
   }
 
   function scroll(direction: "left" | "right") {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = el.querySelector("div")?.offsetWidth ?? 360;
+    const cardWidth = el.querySelector<HTMLDivElement>(":scope > div")?.offsetWidth ?? 360;
     el.scrollBy({
       left: direction === "left" ? -cardWidth - 24 : cardWidth + 24,
+      behavior: "smooth",
+    });
+  }
+
+  function scrollToIndex(index: number) {
+    const el = scrollRef.current;
+    if (!el) return;
+    const cardWidth = el.querySelector<HTMLDivElement>(":scope > div")?.offsetWidth ?? 300;
+    el.scrollTo({
+      left: index * (cardWidth + 24),
       behavior: "smooth",
     });
   }
@@ -171,12 +194,12 @@ export default function Projects() {
           <div
             ref={scrollRef}
             onScroll={updateScrollState}
-            className="scrollbar-hide -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 pb-4"
+            className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 mobile-carousel-padding md:px-0"
           >
             {projects.map((project) => (
               <div
                 key={project.title}
-                className="w-[85vw] shrink-0 snap-start sm:w-[360px]"
+                className="w-[85vw] shrink-0 snap-center sm:w-[340px]"
               >
                 <ProjectCard project={project} />
               </div>
@@ -186,9 +209,15 @@ export default function Projects() {
           {/* Dot indicators */}
           <div className="mt-6 flex justify-center gap-2 md:hidden">
             {projects.map((_, i) => (
-              <span
+              <button
                 key={i}
-                className="h-1.5 w-1.5 rounded-full bg-border-medium"
+                onClick={() => scrollToIndex(i)}
+                aria-label={`Go to project ${i + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  i === activeIndex
+                    ? "w-6 bg-brand-primary"
+                    : "w-2 bg-border-medium"
+                }`}
               />
             ))}
           </div>
